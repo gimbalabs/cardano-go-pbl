@@ -1,0 +1,78 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches: [main]
+  workflow_call:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason for manual deploy (e.g., content update)"
+        required: false
+        default: "Manual deploy"
+
+env:
+  # GCP deploy target — configure as repository variables in
+  # Settings → Secrets and variables → Actions → Variables.
+  # Required: GCP_PROJECT_ID, GCP_REGION, GCP_SERVICE, GCP_REGISTRY.
+  PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+  REGION: ${{ vars.GCP_REGION }}
+  SERVICE: ${{ vars.GCP_SERVICE }}
+  REGISTRY: ${{ vars.GCP_REGISTRY }}
+  IMAGE: ${{ vars.GCP_SERVICE }}
+  # Flip to "preprod" for a preprod build. All other network-dependent
+  # values (gateway URL, course ID, access token policy ID) are resolved
+  # from src/config/networks.ts at build time.
+  ANDAMIO_NETWORK: mainnet
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Build and push
+        run: |
+          docker build \
+            --platform linux/amd64 \
+            --build-arg ANDAMIO_API_KEY=${{ secrets.ANDAMIO_API_KEY }} \
+            --build-arg PUBLIC_ANDAMIO_NETWORK=${{ env.ANDAMIO_NETWORK }} \
+            -t ${{ env.REGISTRY }}/${{ env.IMAGE }}:${{ github.sha }} \
+            -t ${{ env.REGISTRY }}/${{ env.IMAGE }}:latest \
+            .
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE }}:${{ github.sha }}
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE }}:latest
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE }} \
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE }}:${{ github.sha }} \
+            --region ${{ env.REGION }} \
+            --platform managed \
+            --port 3000 \
+            --allow-unauthenticated \
+            --memory 1Gi \
+            --update-env-vars ANDAMIO_API_KEY=${{ secrets.ANDAMIO_API_KEY }} \
+            --update-env-vars PUBLIC_ANDAMIO_NETWORK=${{ env.ANDAMIO_NETWORK }}
+
+      - name: Show URL
+        run: |
+          URL=$(gcloud run services describe ${{ env.SERVICE }} --region ${{ env.REGION }} --format 'value(status.url)')
+          echo "## Deployed" >> $GITHUB_STEP_SUMMARY
+          echo "[$URL]($URL)" >> $GITHUB_STEP_SUMMARY
+          echo "${{ github.event.inputs.reason || 'Push to main' }}" >> $GITHUB_STEP_SUMMARY

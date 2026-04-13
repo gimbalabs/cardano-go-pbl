@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Environment
+.env*
+!.env.example
+
+# Build
+dist/
+build/
+.next/
+out/
+.react-router/
+compiled/
+.astro/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Wallet keys
+preprod_wallet/
+.midnight-seed
+*.skey
+*.vkey
+*.key
+*.pem
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Test/tmp
+coverage/
+tmp/
+.cache/
+
+# Learner scaffold workspace
+midnight-pbl-scaffold/
+
+# Claude local settings (keep settings.json, ignore local overrides)
+.claude/settings.local.json
+
+# Learner progress (local state)
+progress.json
