@@ -1,4 +1,4 @@
-# Deploying Midnight PBL
+# Deploying Cardano Go PBL
 
 The app runs as a standalone Node.js server via Astro's Node adapter. The included Dockerfile packages everything needed.
 
@@ -34,7 +34,7 @@ The commands below use shell variables for the GCP target. Set these first (or s
 ```bash
 export GCP_PROJECT_ID="your-gcp-project"
 export GCP_REGION="us-central1"
-export GCP_SERVICE="your-service-name"        # e.g. "midnight-pbl"
+export GCP_SERVICE="your-service-name"        # e.g. "cardano-go-pbl"
 export GCP_REGISTRY="${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/your-repo"
 ```
 
@@ -102,7 +102,7 @@ docker build \
   --platform linux/amd64 \
   --build-arg ANDAMIO_API_KEY=<key> \
   --build-arg PUBLIC_ANDAMIO_NETWORK=preprod \
-  -t midnight-pbl .
+  -t cardano-go-pbl .
 ```
 
 ### 2. Run
@@ -112,7 +112,7 @@ docker run -d \
   -p 3000:3000 \
   -e ANDAMIO_API_KEY=<key> \
   -e PUBLIC_ANDAMIO_NETWORK=preprod \
-  midnight-pbl
+  cardano-go-pbl
 ```
 
 ## Option C: Without Docker
