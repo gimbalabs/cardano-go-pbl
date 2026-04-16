@@ -1,6 +1,13 @@
 # Setting Up Dolos
 
-Several modules in this course require a local source of Cardano chain data. That source is **Dolos** — a lightweight data node you run on your own machine. This lesson explains what Dolos is, what problem it solves, and how to get it running configured for the preprod testnet.
+Several modules in this course require a local source of Cardano chain data. You have two mature options in the Go ecosystem:
+
+- **Dolos** — Rust, stable, TxPipe. The default for this course.
+- **Dingo** — Go, Blink Labs, built on top of gOuroboros. Under active development; Plutus V1/V2 validation is not yet complete, but it speaks the same Ouroboros protocols as Dolos.
+
+This lesson walks through Dolos because it's the most predictable path to a working local node today. The rest of the course works the same way against Dingo — swap the socket path and everything downstream (Adder, the starter-kit programs, Apollo submissions) behaves identically. If you want to run an all-Go stack end-to-end, install Dingo instead using [its README](https://github.com/blinklabs-io/dingo); the config file differs but the socket semantics are the same.
+
+This lesson explains what Dolos is, what problem it solves, and how to get it running configured for the preprod testnet.
 
 ---
 
@@ -16,12 +23,13 @@ From the official docs:
 
 ## What Problem Does Dolos Solve?
 
-When tools like Adder follow the chain, they need somewhere to connect. There are two options:
+When tools like Adder follow the chain, they need somewhere to connect. There are three options:
 
 | Option | How it works | Trade-offs |
 |--------|-------------|------------|
 | **Public relay (TCP)** | Connect directly to a public Cardano relay over the internet | Simple, no local setup, but depends on a third party's uptime |
-| **Dolos (local socket)** | Run Dolos locally; tools connect via a Unix socket | Fast, local, stable — you control your own data source |
+| **Dolos (local socket)** | Run Dolos locally; tools connect via a Unix socket | Fast, local, stable — you control your own data source. Course default. |
+| **Dingo (local socket)** | Run the Go-native Dingo node locally; same socket semantics as Dolos | Fast, local, all-Go stack. Still maturing — Plutus validation in progress. |
 
 For this course, tools like Adder connect to Dolos via a local Unix socket. This mirrors how real indexers are deployed — co-located with a data node rather than depending on public infrastructure.
 
