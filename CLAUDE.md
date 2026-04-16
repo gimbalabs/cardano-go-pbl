@@ -76,3 +76,7 @@ PUBLIC_ANDAMIO_NETWORK=    # "preprod" or "mainnet"
 - Never commit `.env` or wallet signing keys
 - Never force push
 - Content changes: edit `content/`, compile with `andamio course import-all`, trigger rebuild
+
+## Working on lesson content
+
+- **Always ask before removing anything from a lesson file in `content/cardano-go-pbl/lessons/`.** Flagging duplication or redundancy is helpful; deleting it autonomously is not. Drafts are kept intentionally even when they overlap, and specific phrasings or sections may be load-bearing in ways that aren't obvious. Additions, reorderings, and rewrites-for-review are fine to draft — deletions (section-level or a single paragraph) require an explicit yes.
