@@ -44,10 +44,10 @@
 ## 203 - Applications and Smart Contracts
 1. I can trace how a type defined in Aiken appears in a blueprint file and in Go code.
 2. I can build a transaction that mints or burns tokens using a native script (no smart contract required).
-3. I can build a transaction that mints or burns tokens using a validator script (smart contract).
-4. I can build a transaction that unlocks tokens held by a smart contract.
-5. I can build a transaction that attaches data to a new output on the blockchain.
-6. I can build a transaction that passes input data to a smart contract using a redeemer.
+3. I can build a transaction that attaches data to a new output on the blockchain.
+4. I can build a transaction that passes input data to a smart contract using a redeemer.
+5. I can build a transaction that unlocks funds held by a smart contract.
+6. I can build a transaction that mints or burns tokens using a validator script (smart contract).
 
 ## 204 - Serializing Data
 1. I can extract smart contract data (datums and redeemers) from Cardano's binary format (CBOR).
