@@ -11,6 +11,13 @@ on:
         required: false
         default: "Manual deploy"
 
+# Serialize deploys per ref so the newest commit always wins. Without this,
+# two quick merges race and the older build can finish last and clobber the
+# newer one on Cloud Run.
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   # GCP deploy target — configure as repository variables in
   # Settings → Secrets and variables → Actions → Variables.
