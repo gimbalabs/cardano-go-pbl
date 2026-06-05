@@ -15,7 +15,9 @@ Requires `.env` with `ANDAMIO_API_KEY` and `PUBLIC_ANDAMIO_NETWORK` (see `.env.e
 
 ## Course Content
 
-All content lives in `content/cardano-go-pbl/`. Lessons are the authoring format; `andamio course import-all` pushes compiled content to the Andamio API.
+All content lives in `content/cardano-go-pbl/` — the canonical, human-authored source. Edits are published to the live Andamio course with the `andamio` CLI using an export → edit → import round-trip.
+
+See **[docs/CONTENT.md](docs/CONTENT.md)** for the full contributor workflow (CLI install, auth, editing lessons, and adding images).
 
 ## Stack
 
@@ -29,6 +31,11 @@ All content lives in `content/cardano-go-pbl/`. Lessons are the authoring format
 1. **Deployed web app** — lessons prerendered, assignments on-chain
 2. **Agent harness** — `/learn` in Claude Code for AI-guided instruction
 3. **Open-source template** — fork it, issue your own credentials
+
+## Docs
+
+- **[docs/CONTENT.md](docs/CONTENT.md)** — updating course content via the Andamio CLI
+- **[docs/DEPLOY.md](docs/DEPLOY.md)** — deploying the standalone app (Cloud Run, Docker, or Node)
 
 ## Credits
 
