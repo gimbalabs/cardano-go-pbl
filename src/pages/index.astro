@@ -82,7 +82,7 @@ const sorted = [...modules].sort((a, b) => {
           href={BRANDING.links.andamio}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-mn-primary transition-colors hover:text-mn-text underline underline-offset-2"
+          class="text-link transition-colors hover:text-mn-text underline underline-offset-2"
         >
           Andamio
         </a>.
@@ -91,25 +91,25 @@ const sorted = [...modules].sort((a, b) => {
 
     <!-- Three ways to take this course -->
     <div class="mb-12 sm:mb-16">
-      <p style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; color: #ececec; margin-bottom: 1rem; line-height: 1.3;">
+      <p style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; color: var(--ink); margin-bottom: 1rem; line-height: 1.3;">
         Three ways to learn
       </p>
-      <p style="font-size: 0.875rem; color: #a0a0a4; line-height: 1.7; max-width: 42rem; margin-bottom: 2.5rem;">
+      <p style="font-size: 0.875rem; color: var(--ink-muted); line-height: 1.7; max-width: 42rem; margin-bottom: 2.5rem;">
         This course runs on a new delivery model: one source of content, three interfaces. The same lessons, assignments, and credentials — whether you read them in a browser, learn them with an AI instructor, or fork them to teach your own version.
       </p>
 
       <div style="display: flex; flex-direction: column; gap: 2.5rem;">
         <!-- Web -->
         <div>
-          <p style="font-family: var(--font-heading); font-size: 1rem; font-weight: 500; color: #ececec; margin-bottom: 0.5rem;">
+          <p style="font-family: var(--font-heading); font-size: 1rem; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem;">
             On the web:
           </p>
-          <p style="font-size: 0.875rem; color: #a0a0a4; line-height: 1.7; max-width: 42rem; margin-bottom: 0.75rem;">
+          <p style="font-size: 0.875rem; color: var(--ink-muted); line-height: 1.7; max-width: 42rem; margin-bottom: 0.75rem;">
             Browse lessons in your browser. Submit assignments on-chain via wallet connection. No setup required.
           </p>
           <a
             href={sorted.length > 0 ? `/learn/${sorted[0].moduleCode}/1` : "#"}
-            class="text-mn-primary transition-colors hover:text-mn-text"
+            class="text-link transition-colors hover:text-mn-text"
             style="font-size: 0.875rem; text-decoration: underline; text-underline-offset: 2px;"
           >
             Start learning &rarr;
@@ -118,17 +118,17 @@ const sorted = [...modules].sort((a, b) => {
 
         <!-- Agent harness -->
         <div>
-          <p style="font-family: var(--font-heading); font-size: 1rem; font-weight: 500; color: #ececec; margin-bottom: 0.5rem;">
+          <p style="font-family: var(--font-heading); font-size: 1rem; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem;">
             In Claude Code:
           </p>
-          <p style="font-size: 0.875rem; color: #a0a0a4; line-height: 1.7; max-width: 42rem; margin-bottom: 0.75rem;">
-            Clone the repo, run <code class="text-mn-primary" style="font-family: var(--font-mono); font-size: 0.85em; background-color: #2a2a2a; border-radius: 2px; padding: 0.15em 0.4em;">/learn</code>. An AI instructor delivers lessons conversationally, guides exercises, and adapts to your pace. Progress tracked locally — no account needed.
+          <p style="font-size: 0.875rem; color: var(--ink-muted); line-height: 1.7; max-width: 42rem; margin-bottom: 0.75rem;">
+            Clone the repo, run <code style="font-family: var(--font-mono); font-size: 0.85em; color: var(--link); background-color: var(--accent-soft); border-radius: var(--radius-sm); padding: 0.15em 0.4em;">/learn</code>. An AI instructor delivers lessons conversationally, guides exercises, and adapts to your pace. Progress tracked locally — no account needed.
           </p>
           <a
             href={BRANDING.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-mn-primary transition-colors hover:text-mn-text"
+            class="text-link transition-colors hover:text-mn-text"
             style="font-size: 0.875rem; text-decoration: underline; text-underline-offset: 2px;"
           >
             Clone and /learn &rarr;
@@ -137,17 +137,17 @@ const sorted = [...modules].sort((a, b) => {
 
         <!-- Fork as template -->
         <div>
-          <p style="font-family: var(--font-heading); font-size: 1rem; font-weight: 500; color: #ececec; margin-bottom: 0.5rem;">
+          <p style="font-family: var(--font-heading); font-size: 1rem; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem;">
             Fork and teach:
           </p>
-          <p style="font-size: 0.875rem; color: #a0a0a4; line-height: 1.7; max-width: 42rem; margin-bottom: 0.75rem;">
+          <p style="font-size: 0.875rem; color: var(--ink-muted); line-height: 1.7; max-width: 42rem; margin-bottom: 0.75rem;">
             Fork the repo, swap in your own content, issue credentials on the same protocol. The repo is the course — you own the compiler.
           </p>
           <a
             href={BRANDING.links.githubFork}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-mn-primary transition-colors hover:text-mn-text"
+            class="text-link transition-colors hover:text-mn-text"
             style="font-size: 0.875rem; text-decoration: underline; text-underline-offset: 2px;"
           >
             Fork this repo &rarr;
@@ -155,7 +155,7 @@ const sorted = [...modules].sort((a, b) => {
         </div>
       </div>
 
-      <p style="font-size: 0.875rem; color: #a0a0a4; margin-top: 2.5rem;">
+      <p style="font-size: 0.875rem; color: var(--ink-muted); margin-top: 2.5rem;">
         One source of truth. Three interfaces. Same SLTs, same assignments, same credentials.
       </p>
     </div>
