@@ -22,11 +22,11 @@ const sltCount = module.slts?.length ?? 0;
   href={`/learn/${moduleCode}/1`}
   class="group flex items-baseline gap-4 py-4 transition-colors hover:bg-course-surface/50 sm:py-5 -mx-4 px-4 sm:-mx-6 sm:px-6"
 >
-  <span class="text-sm font-mono text-mn-text-muted w-6 shrink-0">
-    {index + 1}
+  <span class="text-sm font-mono font-medium text-structure w-7 shrink-0 tabular-nums">
+    {String(index + 1).padStart(2, "0")}
   </span>
   <div class="min-w-0 flex-1">
-    <span class="text-base font-medium text-mn-text group-hover:text-mn-primary-hover">
+    <span class="text-base font-medium text-mn-text transition-colors group-hover:text-link">
       {module.title ?? "Untitled Module"}
     </span>
     {module.description && (
