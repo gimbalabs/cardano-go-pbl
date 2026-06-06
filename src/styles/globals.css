@@ -52,6 +52,7 @@
 
   /* Accents — dual system */
   --accent: #00add8;                 /* Go cyan: interactive / code accent */
+  --accent-ink: #08171d;             /* dark ink for text/icons ON the cyan accent (both themes) */
   --accent-hover: color-mix(in oklab, var(--accent) 80%, #000);
   --accent-soft: color-mix(in oklab, var(--accent) 12%, var(--surface));
   --accent-structure: #0033ad;       /* Cardano cobalt: structure / wayfinding */
@@ -165,6 +166,7 @@
   --color-mn-primary: var(--accent);
   --color-mn-primary-light: var(--accent);
   --color-mn-primary-hover: var(--accent-hover);
+  --color-accent-ink: var(--accent-ink);
 
   --color-mn-text: var(--ink);
   --color-mn-text-muted: var(--ink-muted);
