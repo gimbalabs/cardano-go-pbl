@@ -81,11 +81,11 @@ export function EvidenceEditor({
             <div key={i} className="h-7 w-7 animate-pulse rounded-sm bg-course-surface" />
           ))}
         </div>
-        <div className="bg-[#ece6d6] p-5">
+        <div className="bg-course-surface p-5">
           <div className="space-y-3">
-            <div className="h-4 w-3/4 animate-pulse rounded bg-gray-200" />
-            <div className="h-4 w-1/2 animate-pulse rounded bg-gray-200" />
-            <div className="h-4 w-5/6 animate-pulse rounded bg-gray-200" />
+            <div className="h-4 w-3/4 animate-pulse rounded bg-mn-text/10" />
+            <div className="h-4 w-1/2 animate-pulse rounded bg-mn-text/10" />
+            <div className="h-4 w-5/6 animate-pulse rounded bg-mn-text/10" />
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@ export function EvidenceEditor({
   return (
     <div className="rounded-sm border border-course-border overflow-hidden">
       {!disabled && <Toolbar editor={editor} />}
-      <div className="bg-[#ece6d6] p-5">
+      <div className="bg-course-surface p-5">
         <EditorContent editor={editor} />
       </div>
     </div>
