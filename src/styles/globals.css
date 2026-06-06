@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+/* ── Self-hosted Go Mono (BSD-3, © Bigelow & Holmes / The Go Authors) ──── */
+/* License: public/fonts/Go-Mono-LICENSE.txt */
+@font-face {
+  font-family: "Go Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Go-Mono.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Go Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/Go-Mono-Bold.ttf") format("truetype");
+}
+
 /*
  * Cardano Go Design System
  *
@@ -61,6 +78,16 @@
   --radius-lg: 10px;
   --radius-xl: 14px;
 
+  /* Modular type scale (base 1rem = 17px, ratio ~1.2) */
+  --text-xs: 0.694rem;
+  --text-sm: 0.833rem;
+  --text-base: 1rem;
+  --text-lg: 1.2rem;
+  --text-xl: 1.44rem;
+  --text-2xl: 1.728rem;
+  --text-3xl: 2.074rem;
+  --tracking-heading: -0.018em;
+
   /* Focus ring */
   --ring: color-mix(in oklab, var(--accent) 70%, #000);
 
@@ -111,11 +138,12 @@
 /* ── Tailwind v4 theme — ALIASES only (maps tokens into utilities) ─────── */
 
 @theme {
-  /* Fonts */
-  --font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Urbanist", ui-sans-serif, system-ui, sans-serif;
-  --font-prose: "Lora", Georgia, "Times New Roman", serif;
-  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", "Menlo", monospace;
+  /* Fonts — Work Sans (Go brand) headings, Geist body/UI, Go Mono code */
+  --font-heading: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-prose: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Go Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular",
+    "Menlo", monospace;
 
   /* Colors → semantic tokens (existing utility names preserved) */
   --color-course: var(--bg);
@@ -176,6 +204,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
+  letter-spacing: var(--tracking-heading);
 }
 
 code,
