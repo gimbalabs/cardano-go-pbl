@@ -1,6 +1,6 @@
 ---
 date: 2026-06-06
-status: active
+status: completed
 type: refactor
 origin: docs/brainstorms/2026-06-06-restyle-requirements.md
 ---
