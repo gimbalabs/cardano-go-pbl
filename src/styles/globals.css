@@ -67,6 +67,16 @@
   --code-ink: #e6e8ec;
   --code-border: #00000000;
 
+  /* Syntax palette — tuned for the dark code slab; constant across themes.
+     keyword=blue, function=Go cyan, string=warm, number=amber, type=teal. */
+  --syn-keyword: #7aa2f7;
+  --syn-function: #56c7e8;
+  --syn-string: #c8a06a;
+  --syn-number: #e0af68;
+  --syn-type: #7dcfb6;
+  --syn-comment: #6e7787;
+  --syn-punct: #97a0b0;
+
   /* Status */
   --success: #0f9d6b;
   --warning: #b7791f;
@@ -350,89 +360,68 @@ samp {
   word-break: normal;
 }
 
-/* ── Syntax highlighting (hljs overrides) ────────────────────────────── */
+/* ── Syntax highlighting ─────────────────────────────────────────────── */
+/* One token-based hljs palette shared by lesson prose (highlight.js) and the
+   evidence editor (lowlight) — both emit .hljs-* classes inside <pre>. */
 
-.prose-course pre .hljs-keyword,
-.prose-course pre .hljs-selector-tag,
-.prose-course pre .hljs-built_in {
-  color: #00ADD8;
-}
-
-.prose-course pre .hljs-string,
-.prose-course pre .hljs-attr {
-  color: #c9826b;
-}
-
-.prose-course pre .hljs-comment,
-.prose-course pre .hljs-quote {
-  color: #6b7280;
-  font-style: italic;
-}
-
-.prose-course pre .hljs-title,
-.prose-course pre .hljs-section,
-.prose-course pre .hljs-title.function_ {
-  color: #d4d4d4;
-}
-
-.prose-course pre .hljs-number,
-.prose-course pre .hljs-literal {
-  color: #00ADD8;
-}
-
-.prose-course pre .hljs-type,
-.prose-course pre .hljs-title.class_ {
-  color: #a0a0a0;
-}
-
-.prose-course pre .hljs-variable,
-.prose-course pre .hljs-template-variable {
-  color: #d4d4d4;
-}
-
-.prose-course pre .hljs-name,
-.prose-course pre .hljs-selector-id,
-.prose-course pre .hljs-selector-class {
-  color: #00ADD8;
-}
-
-.prose-course pre .hljs-symbol,
-.prose-course pre .hljs-bullet {
-  color: #c9826b;
-}
-
-.prose-course pre .hljs-meta {
-  color: #9ca3af;
-}
-
-.prose-course pre .hljs-params {
-  color: #d4d4d4;
-}
-
-.prose-course pre .hljs-punctuation {
-  color: #9ca3af;
-}
-
-.prose-course pre .hljs-operator {
-  color: #9ca3af;
-}
-
-.prose-course pre .hljs-property {
-  color: #a0a0a0;
-}
-
-.prose-course pre .hljs-regexp {
-  color: #c9826b;
-}
-
-.prose-course pre .hljs-tag {
-  color: #00ADD8;
-}
-
-.prose-course pre .hljs {
+pre .hljs {
   background: transparent;
   color: var(--code-ink);
   padding: 0;
+}
+
+pre .hljs-keyword,
+pre .hljs-selector-tag,
+pre .hljs-literal,
+pre .hljs-section {
+  color: var(--syn-keyword);
+}
+
+pre .hljs-built_in,
+pre .hljs-title,
+pre .hljs-title.function_,
+pre .hljs-name,
+pre .hljs-tag {
+  color: var(--syn-function);
+}
+
+pre .hljs-string,
+pre .hljs-attr,
+pre .hljs-symbol,
+pre .hljs-bullet,
+pre .hljs-regexp,
+pre .hljs-selector-class,
+pre .hljs-selector-id {
+  color: var(--syn-string);
+}
+
+pre .hljs-number {
+  color: var(--syn-number);
+}
+
+pre .hljs-type,
+pre .hljs-title.class_,
+pre .hljs-property,
+pre .hljs-attribute {
+  color: var(--syn-type);
+}
+
+pre .hljs-variable,
+pre .hljs-template-variable,
+pre .hljs-params {
+  color: var(--code-ink);
+}
+
+pre .hljs-comment,
+pre .hljs-quote {
+  color: var(--syn-comment);
+  font-style: italic;
+}
+
+pre .hljs-meta,
+pre .hljs-punctuation,
+pre .hljs-operator {
+  color: var(--syn-punct);
 }
 
 /* Custom: rounded images, and tables that scroll horizontally on small
