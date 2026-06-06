@@ -35,6 +35,10 @@ if (!module) {
 // Render assignment content to HTML
 const contentHtml = assignment ? renderMarkdown(assignment.contentJson) : "";
 
+const sortedSlts = [...slts].sort(
+  (a, b) => (a.moduleIndex ?? 0) - (b.moduleIndex ?? 0)
+);
+
 const title = getPageTitle(`Assignment: ${module.title ?? moduleCode}`);
 ---
 
@@ -47,38 +51,56 @@ const title = getPageTitle(`Assignment: ${module.title ?? moduleCode}`);
   currentLessonIndex={null}
   isAssignment={true}
 >
-  <div class="mx-auto max-w-4xl px-4 py-6 sm:px-6 sm:py-10">
-    <!-- Assignment header -->
-    <div class="mb-6 sm:mb-8">
-      <h1 class="mb-3 text-2xl font-bold font-heading text-mn-text sm:text-3xl">
-        {assignment?.title ?? `${module.title ?? "Module"} Assignment`}
-      </h1>
-      {assignment?.description && (
-        <p class="max-w-2xl text-base text-mn-text-muted sm:text-lg">
-          {assignment.description}
-        </p>
-      )}
+  <div class="assignment-split">
+    <!-- Left: assignment description / rubric -->
+    <div class="assignment-desc">
+      <div class="assignment-progress" aria-hidden="true"></div>
+      <div class="assignment-desc-inner">
+        <p class="assignment-eyebrow">{module.title ?? "Module"} · Assignment</p>
+        <h1 class="assignment-title">
+          {assignment?.title ?? `${module.title ?? "Module"} Assignment`}
+        </h1>
+        {assignment?.description && (
+          <p class="assignment-lede">{assignment.description}</p>
+        )}
+
+        {assignment && contentHtml ? (
+          <article class="prose prose-course mt-6" set:html={contentHtml} />
+        ) : (
+          <div class="mt-6 rounded-lg border border-course-border bg-course-card p-6 text-center">
+            <p class="text-mn-text-muted">
+              No assignment available for this module yet.
+            </p>
+          </div>
+        )}
+
+        {sortedSlts.length > 0 && (
+          <div class="assignment-slts">
+            <p class="assignment-slts-head">What you'll demonstrate</p>
+            <ul class="assignment-slts-list">
+              {sortedSlts.map((slt, idx) => (
+                <li class="assignment-slt">
+                  <span class="assignment-slt-index">{slt.moduleIndex ?? idx + 1}</span>
+                  <span>{slt.sltText ?? `Lesson ${idx + 1}`}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
 
-    <!-- Assignment content -->
-    {assignment && contentHtml ? (
-      <section class="mb-10">
-        <article class="prose prose-course" set:html={contentHtml} />
-      </section>
-    ) : (
-      <div class="mb-10 rounded-sm border border-course-border bg-course-surface p-4 text-center sm:p-8">
-        <p class="text-mn-text-muted">
-          No assignment available for this module yet.
-        </p>
+    <!-- Right: work surface (cobalt field + floating card) -->
+    <div class="assignment-work">
+      <div class="assignment-work-art" aria-hidden="true"></div>
+      <div class="assignment-card">
+        <AssignmentInteractive
+          client:only="react"
+          courseId={courseId}
+          moduleCode={moduleCode}
+          sltHash={module.sltHash ?? null}
+        />
       </div>
-    )}
-
-    <!-- Interactive assignment island -->
-    <AssignmentInteractive
-      client:only="react"
-      courseId={courseId}
-      moduleCode={moduleCode}
-      sltHash={module.sltHash ?? null}
-    />
+    </div>
   </div>
 </LearnLayout>
