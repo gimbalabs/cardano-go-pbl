@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* ── Self-hosted Go Mono (BSD-3, © Bigelow & Holmes / The Go Authors) ──── */
 /* License: public/fonts/Go-Mono-LICENSE.txt */
@@ -266,112 +267,61 @@ samp {
 :root[data-theme="dark"] .theme-icon-moon { display: none; }
 
 /* ── Prose / Markdown styling ────────────────────────────────────────── */
+/* Built on @tailwindcss/typography. Colors flow from semantic tokens via
+   --tw-prose-* vars (so light/dark switch automatically — no prose-invert).
+   Only genuinely custom bits live as explicit rules below. */
 
 .prose-course {
+  --tw-prose-body: var(--ink);
+  --tw-prose-headings: var(--ink);
+  --tw-prose-lead: var(--ink-muted);
+  --tw-prose-links: var(--link);
+  --tw-prose-bold: var(--ink);
+  --tw-prose-counters: var(--ink-muted);
+  --tw-prose-bullets: var(--ink-faint);
+  --tw-prose-hr: var(--line);
+  --tw-prose-quotes: var(--ink-muted);
+  --tw-prose-quote-borders: var(--accent-structure);
+  --tw-prose-captions: var(--ink-faint);
+  --tw-prose-code: var(--link);
+  --tw-prose-pre-code: var(--code-ink);
+  --tw-prose-pre-bg: var(--code-bg);
+  --tw-prose-th-borders: var(--line);
+  --tw-prose-td-borders: var(--line);
+
   font-family: var(--font-prose);
-  font-size: 0.875rem;
-  color: var(--ink-muted);
-  line-height: 1.7;
+  max-width: 68ch;
+  text-wrap: pretty;
 }
 
-.prose-course h1,
-.prose-course h2,
-.prose-course h3,
-.prose-course h4,
-.prose-course h5,
-.prose-course h6 {
+.prose-course :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"] *)) {
   font-family: var(--font-heading);
-  color: var(--ink);
-  font-weight: 600;
-  line-height: 1.3;
-  margin-top: 1.75em;
-  margin-bottom: 0.75em;
+  letter-spacing: var(--tracking-heading);
+  text-wrap: balance;
 }
 
-.prose-course h1 { font-size: 1.875rem; }
-.prose-course h2 { font-size: 1.5rem; }
-.prose-course h3 { font-size: 1.25rem; }
-
-.prose-course p {
-  margin-bottom: 1em;
-}
-
-.prose-course a {
-  color: var(--link);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.15s;
-}
-
-.prose-course a:hover {
-  color: var(--link-hover);
-}
-
-.prose-course strong {
-  color: var(--ink);
-  font-weight: 600;
-}
-
-.prose-course em {
-  font-style: italic;
-}
-
-.prose-course ul,
-.prose-course ol {
-  padding-left: 1.5em;
-  margin-bottom: 1em;
-}
-
-.prose-course ul {
-  list-style-type: disc;
-}
-
-.prose-course ol {
-  list-style-type: decimal;
-}
-
-.prose-course li {
-  margin-bottom: 0.25em;
-}
-
-.prose-course blockquote {
-  font-family: var(--font-prose);
-  border-left: 3px solid var(--accent-structure);
-  padding-left: 1em;
-  margin-left: 0;
-  margin-bottom: 1em;
-  color: var(--ink-muted);
-  font-style: italic;
-}
-
-/* ── Inline code ─────────────────────────────────────────────────────── */
-
-.prose-course code {
+/* Inline code — token bg + Go Mono; drop the plugin's backtick quotes */
+.prose-course :where(code):not(:where([class~="not-prose"] *)):not(pre code) {
   font-family: var(--font-mono);
-  font-size: 0.85em;
+  font-weight: 500;
   background-color: var(--accent-soft);
   color: var(--link);
   border-radius: var(--radius-sm);
   padding: 0.15em 0.4em;
-  word-break: break-word;
+}
+.prose-course :where(code):not(pre code)::before,
+.prose-course :where(code):not(pre code)::after {
+  content: none;
 }
 
-/* ── Code blocks ─────────────────────────────────────────────────────── */
+/* ── Code blocks — dark slab, Go Mono, language label ────────────────── */
+/* pre background/padding come from the plugin (--tw-prose-pre-bg). */
 
 .prose-course pre {
   position: relative;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  line-height: 1.6;
-  background-color: var(--code-bg);
-  color: var(--code-ink);
   border: 1px solid var(--code-border);
   border-radius: var(--radius-md);
-  padding: 1rem 1.25rem;
-  padding-top: 1.25rem;
-  margin-bottom: 1.25em;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 
 .prose-course pre > code[class*="language-"]::before {
@@ -485,41 +435,25 @@ samp {
   padding: 0;
 }
 
-.prose-course hr {
-  border: none;
-  border-top: 1px solid var(--line);
-  margin: 2em 0;
-}
-
+/* Custom: rounded images, and tables that scroll horizontally on small
+   screens (plugin handles colors/borders via --tw-prose-*). */
 .prose-course img {
-  max-width: 100%;
-  height: auto;
   border-radius: var(--radius-md);
-  margin: 1em 0;
 }
 
 .prose-course table {
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 1em;
   display: block;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-.prose-course th,
-.prose-course td {
-  border: 1px solid var(--line);
-  padding: 0.5em 0.75em;
-  text-align: left;
+.prose-course :where(th, td) {
   white-space: nowrap;
 }
 
-.prose-course th {
+.prose-course :where(th) {
   background-color: color-mix(in oklab, var(--ink) 4%, transparent);
-  font-weight: 600;
 }
 
 /* ── TipTap Evidence Editor ─────────────────────────────────────────── */
@@ -799,5 +733,60 @@ samp {
 @media (max-width: 1023px) {
   .learn-sidebar-overlay {
     display: block;
+  }
+}
+
+/* ── Print — lessons as clean typeset handouts ───────────────────────── */
+
+@media print {
+  #main-nav,
+  footer,
+  .learn-sidebar,
+  .learn-sidebar-toggle,
+  .learn-sidebar-overlay,
+  .theme-toggle {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt;
+  }
+
+  .learn-layout {
+    display: block;
+    min-height: 0;
+  }
+
+  .prose-course {
+    max-width: none;
+    --tw-prose-body: #000;
+    --tw-prose-headings: #000;
+  }
+
+  .prose-course pre {
+    background: #f6f6f4 !important;
+    color: #111 !important;
+    border: 1px solid #ccc !important;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .prose-course pre .hljs,
+  .prose-course pre [class*="hljs-"] {
+    color: #111 !important;
+  }
+
+  .prose-course a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .prose-course a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555;
   }
 }

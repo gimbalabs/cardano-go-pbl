@@ -97,7 +97,7 @@ const title = getPageTitle(lesson.title ?? "Lesson");
     <section class="mb-12">
       {contentHtml ? (
         <>
-          <article class="prose-course" set:html={contentHtml} />
+          <article class="prose prose-course" set:html={contentHtml} />
           <CodeCopyButton />
         </>
       ) : (

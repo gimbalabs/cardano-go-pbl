@@ -63,7 +63,7 @@ const title = getPageTitle(`Assignment: ${module.title ?? moduleCode}`);
     <!-- Assignment content -->
     {assignment && contentHtml ? (
       <section class="mb-10">
-        <article class="prose-course" set:html={contentHtml} />
+        <article class="prose prose-course" set:html={contentHtml} />
       </section>
     ) : (
       <div class="mb-10 rounded-sm border border-course-border bg-course-surface p-4 text-center sm:p-8">
