@@ -21,6 +21,24 @@ import "@/styles/globals.css";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Theme bootstrap: applies the stored or OS-preferred theme before first
+         paint so there is no flash. Light is the default. Theme STATE only —
+         the toggle in the nav writes localStorage. -->
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t !== "light" && t !== "dark") {
+            t = window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+          }
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
     <!-- Process shim: Mesh SDK transitive deps reference `process` which
          doesn't exist in the browser. The full vite-plugin-node-polyfills
          process shim can't be used because it shadows Node's real process.env

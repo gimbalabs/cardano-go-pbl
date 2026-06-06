@@ -209,6 +209,33 @@ samp {
   background: color-mix(in oklab, var(--ink) 32%, transparent);
 }
 
+/* ── Theme toggle ─────────────────────────────────────────────────────── */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: var(--radius-md);
+  color: var(--ink-muted);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+}
+
+.theme-toggle:hover {
+  color: var(--ink);
+  background-color: color-mix(in oklab, var(--ink) 6%, transparent);
+  border-color: var(--line);
+}
+
+/* Show the icon for the theme you'd switch TO: moon in light, sun in dark. */
+.theme-icon-sun { display: none; }
+.theme-icon-moon { display: block; }
+:root[data-theme="dark"] .theme-icon-sun { display: block; }
+:root[data-theme="dark"] .theme-icon-moon { display: none; }
+
 /* ── Prose / Markdown styling ────────────────────────────────────────── */
 
 .prose-course {
