@@ -353,16 +353,44 @@ samp {
   text-wrap: pretty;
 }
 
+/* Prose headings — sized/weighted explicitly (unlayered) so they win over
+   Tailwind preflight's font-size:inherit reset regardless of layer order.
+   Generous space above, tight below: section breaks read clearly. */
 .prose-course :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"] *)) {
   font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
   letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-heading);
+  color: var(--ink);
   text-wrap: balance;
+}
+.prose-course :where(h1):not(:where([class~="not-prose"] *)) {
+  font-size: var(--text-3xl);
+  letter-spacing: var(--tracking-display);
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+.prose-course :where(h2):not(:where([class~="not-prose"] *)) {
+  font-size: var(--text-xl);
+  margin-top: 2.2em;
+  margin-bottom: 0.6em;
+}
+.prose-course :where(h3):not(:where([class~="not-prose"] *)) {
+  font-size: var(--text-lg);
+  margin-top: 1.8em;
+  margin-bottom: 0.4em;
+}
+.prose-course :where(h4, h5, h6):not(:where([class~="not-prose"] *)) {
+  font-size: var(--text-base);
+  margin-top: 1.5em;
+  margin-bottom: 0.3em;
 }
 
 /* Inline code — token bg + Go Mono; drop the plugin's backtick quotes */
 .prose-course :where(code):not(:where([class~="not-prose"] *)):not(pre code) {
   font-family: var(--font-mono);
   font-weight: 500;
+  font-size: 0.85em;
   background-color: var(--accent-soft);
   color: var(--link);
   border-radius: var(--radius-sm);
@@ -374,13 +402,19 @@ samp {
 }
 
 /* ── Code blocks — dark slab, Go Mono, language label ────────────────── */
-/* pre background/padding come from the plugin (--tw-prose-pre-bg). */
+/* Sized down from body (Go Mono runs large): a smaller, technical step
+   that sits elegantly against the 17px prose, with room to breathe. */
 
 .prose-course pre {
   position: relative;
   font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-code);
   border: 1px solid var(--code-border);
   border-radius: var(--radius-md);
+  padding: var(--space-5) var(--space-5);
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-5);
 }
 
 .prose-course pre > code[class*="language-"]::before {
