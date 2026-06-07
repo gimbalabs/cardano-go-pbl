@@ -9,6 +9,7 @@ export const prerender = true;
 
 import AppLayout from "@/layouts/AppLayout.astro";
 import ModuleCard from "@/components/course/ModuleCard.astro";
+import LogoMark from "@/components/brand/LogoMark.astro";
 import { fetchCourseModules } from "@/lib/gateway.server";
 import { CURRENT_NETWORK } from "@/config/network";
 import { BRANDING } from "@/config/branding";
@@ -30,15 +31,9 @@ const sorted = [...modules].sort((a, b) => {
 
 <AppLayout title={BRANDING.fullTitle}>
   <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-20">
-    <!-- Hero symbol + wordmark -->
+    <!-- Hero: placeholder logo + wordmark -->
     <div class="mb-12 sm:mb-16 flex items-start gap-5">
-      {BRANDING.logo.heroSymbol && (
-        <img
-          src={BRANDING.logo.heroSymbol}
-          alt=""
-          class="mt-1 h-12 w-12 opacity-40 sm:h-14 sm:w-14"
-        />
-      )}
+      <LogoMark size={52} class="mt-1 shrink-0 text-structure" />
       <div>
         <p class="font-heading text-4xl font-medium text-mn-text" style="letter-spacing: var(--tracking-display); line-height: var(--leading-display)">
           {BRANDING.hero.title}
@@ -177,17 +172,11 @@ const sorted = [...modules].sort((a, b) => {
       </a>
     </div>
 
-    <!-- Wordmark footer -->
-    {BRANDING.logo.wordmark && (
-      <div class="mt-16 flex justify-center sm:mt-20">
-        <a href={BRANDING.links.andamio} target="_blank" rel="noopener noreferrer">
-          <img
-            src={BRANDING.logo.wordmark}
-            alt=""
-            class="h-6 opacity-20 transition-opacity hover:opacity-40"
-          />
-        </a>
-      </div>
-    )}
+    <!-- Footer placeholder logo -->
+    <div class="mt-16 flex justify-center sm:mt-20">
+      <a href={BRANDING.links.andamio} target="_blank" rel="noopener noreferrer" aria-label="Andamio">
+        <LogoMark size={30} class="text-mn-text-muted opacity-50 transition-opacity hover:opacity-100" />
+      </a>
+    </div>
   </div>
 </AppLayout>

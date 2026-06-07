@@ -1,0 +1,37 @@
+---
+/**
+ * Placeholder logo mark — a "G" in a circle.
+ *
+ * Stands in wherever a real brand logo should go (hero, footer) so the slot
+ * is visible and recognizable rather than empty. Uses `currentColor`, so set
+ * the color with a text-* utility on the element.
+ *
+ * TODO(branding): replace with the real logo when a team member designs one
+ * (swap this component's contents, or point it at an asset).
+ */
+interface Props {
+  size?: number;
+  class?: string;
+}
+
+const { size = 40, class: className = "" } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 40 40"
+  class={className}
+  role="img"
+  aria-label="Logo placeholder"
+  fill="none"
+>
+  <circle cx="20" cy="20" r="18.5" stroke="currentColor" stroke-width="2"></circle>
+  <text
+    x="20"
+    y="27.5"
+    text-anchor="middle"
+    fill="currentColor"
+    style="font: 600 22px var(--font-heading); letter-spacing: -0.02em;"
+  >G</text>
+</svg>
