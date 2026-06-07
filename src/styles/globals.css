@@ -112,6 +112,9 @@
   --leading-ui: 1.4;
   --leading-code: 1.55;
 
+  /* Reading measure — one line-length for all long-form prose. */
+  --measure: 65ch;
+
   /* Spacing scale — mirrors Tailwind's 0.25rem grid so vanilla CSS and
      utility classes share one rhythm. Use small steps within a block,
      large steps between sections (tight-intra / generous-inter). */
@@ -346,7 +349,7 @@ samp {
   --tw-prose-td-borders: var(--line);
 
   font-family: var(--font-prose);
-  max-width: 68ch;
+  max-width: var(--measure);
   text-wrap: pretty;
 }
 
