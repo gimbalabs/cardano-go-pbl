@@ -188,6 +188,43 @@ function walkNode(node: JSONContent, lines: string[], depth: number): void {
       lines.push("---\n");
       break;
 
+    case "table": {
+      const rows = (node.content ?? []).filter(
+        (r) => r.type === "tableRow"
+      );
+      if (rows.length === 0) break;
+
+      const cellsOf = (row: JSONContent) =>
+        (row.content ?? []).filter(
+          (c) => c.type === "tableCell" || c.type === "tableHeader"
+        );
+
+      // GFM cells are single-line: flatten block content, escape pipes.
+      const cellText = (cell: JSONContent) =>
+        (cell.content ?? [])
+          .map((block) => extractInlineText(block))
+          .join(" ")
+          .replace(/\s*\n\s*/g, " ")
+          .replace(/\|/g, "\\|")
+          .trim();
+
+      const renderRow = (row: JSONContent) =>
+        `| ${cellsOf(row).map(cellText).join(" | ")} |`;
+
+      const colCount = cellsOf(rows[0]).length;
+      if (colCount === 0) break;
+
+      // Blank line before so marked parses this as a block-level table.
+      lines.push("");
+      lines.push(renderRow(rows[0]));
+      lines.push(`| ${Array(colCount).fill("---").join(" | ")} |`);
+      for (let i = 1; i < rows.length; i++) {
+        lines.push(renderRow(rows[i]));
+      }
+      lines.push("");
+      break;
+    }
+
     case "image": {
       const src = node.attrs?.src as string | undefined;
       const alt = (node.attrs?.alt as string) ?? "";
