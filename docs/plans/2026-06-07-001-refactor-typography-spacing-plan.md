@@ -1,6 +1,6 @@
 ---
 date: 2026-06-07
-status: active
+status: completed
 type: refactor
 origin: docs/ideation/2026-06-06-typography-refinement-ideation.md
 ---
