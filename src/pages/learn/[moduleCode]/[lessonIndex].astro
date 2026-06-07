@@ -80,14 +80,14 @@ const title = getPageTitle(lesson.title ?? "Lesson");
   currentLessonIndex={lessonIndex}
   isAssignment={false}
 >
-  <div class="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-10">
+  <div class="mx-auto px-4 py-6 sm:px-6 sm:py-10" style="max-width: var(--measure)">
     <!-- Lesson header -->
     <div class="mb-6 sm:mb-8">
       <p class="mb-2 text-sm text-mn-text-muted">
         Lesson {lessonIndex} of {totalLessons}
       </p>
       {lesson.title && (
-        <h1 class="text-2xl font-bold font-heading text-mn-text sm:text-3xl">
+        <h1 class="text-2xl font-heading text-mn-text sm:text-3xl">
           {lesson.title}
         </h1>
       )}

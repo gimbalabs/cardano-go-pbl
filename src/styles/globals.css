@@ -46,7 +46,8 @@
   --line-strong: #d4d0c2;   /* emphasized hairline */
 
   /* Ink */
-  --ink: #14171a;           /* primary text */
+  --ink: #14171a;           /* headings, UI emphasis (near-black, reserved) */
+  --ink-body: #2b2f36;      /* long-form body — softened so it doesn't buzz */
   --ink-muted: #5f6670;     /* secondary text (AA on paper) */
   --ink-faint: #8a8f98;     /* tertiary / placeholder */
 
@@ -90,15 +91,42 @@
   --radius-lg: 10px;
   --radius-xl: 14px;
 
-  /* Modular type scale (base 1rem = 17px, ratio ~1.2) */
-  --text-xs: 0.694rem;
-  --text-sm: 0.833rem;
-  --text-base: 1rem;
-  --text-lg: 1.2rem;
-  --text-xl: 1.44rem;
-  --text-2xl: 1.728rem;
-  --text-3xl: 2.074rem;
-  --tracking-heading: -0.018em;
+  /* Weight roles — large-goes-lighter, capped at 600. Hierarchy comes from
+     size + space + tracking, not heavier strokes. */
+  --weight-body: 400;
+  --weight-label: 500;
+  --weight-display: 500;   /* hero / largest type — lighter at scale */
+  --weight-heading: 600;   /* h1–h3 structural headings */
+  --weight-emphasis: 600;  /* inline <strong> — the only 600 in body */
+
+  /* Tracking ramp — tighter as type grows; positive on small uppercase. */
+  --tracking-display: -0.03em;
+  --tracking-heading: -0.02em;
+  --tracking-body: 0em;
+  --tracking-label: 0.08em;
+
+  /* Leading by role — airy prose, tight display/UI, breathing code. */
+  --leading-display: 1.1;
+  --leading-heading: 1.2;
+  --leading-body: 1.7;
+  --leading-ui: 1.4;
+  --leading-code: 1.55;
+
+  /* Reading measure — one line-length for all long-form prose. */
+  --measure: 65ch;
+
+  /* Spacing scale — mirrors Tailwind's 0.25rem grid so vanilla CSS and
+     utility classes share one rhythm. Use small steps within a block,
+     large steps between sections (tight-intra / generous-inter). */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
 
   /* Focus ring */
   --ring: color-mix(in oklab, var(--accent) 70%, #000);
@@ -123,6 +151,7 @@
   --line-strong: #ffffff2e;
 
   --ink: #f1f1f1;
+  --ink-body: #d7dce4;      /* softened body on dark, below heading white */
   --ink-muted: #aeb6c2;
   --ink-faint: #7c8493;
 
@@ -150,8 +179,9 @@
 /* ── Tailwind v4 theme — ALIASES only (maps tokens into utilities) ─────── */
 
 @theme {
-  /* Fonts — Work Sans (Go brand) headings, Geist body/UI, Go Mono code */
-  --font-heading: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  /* Fonts — Geist for all text (headings via weight+tracking+size, not a
+     second family), Go Mono for code (the sole second voice). */
+  --font-heading: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-prose: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Go Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular",
@@ -186,6 +216,18 @@
   --radius-lg: 10px;
   --radius-md: 6px;
   --radius-sm: 4px;
+
+  /* Modular type scale (base 1rem = 17px, ratio ~1.2) — wired into Tailwind's
+     text-* utilities so every size in markup is a scale step. Display caps at
+     --text-4xl; nothing larger is defined (no text-5xl/6xl). */
+  --text-xs: 0.694rem;
+  --text-sm: 0.833rem;
+  --text-base: 1rem;
+  --text-lg: 1.2rem;
+  --text-xl: 1.44rem;
+  --text-2xl: 1.728rem;
+  --text-3xl: 2.074rem;
+  --text-4xl: 2.488rem;
 }
 
 /* ── Base styles ──────────────────────────────────────────────────────── */
@@ -199,13 +241,16 @@
 
 html {
   font-size: 17px;
+  font-optical-sizing: auto;
 }
 
 html,
 body {
   background-color: var(--bg);
-  color: var(--ink);
+  color: var(--ink-body);
   font-family: var(--font-body);
+  font-weight: var(--weight-body);
+  line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -217,7 +262,9 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
   letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-heading);
 }
 
 code,
@@ -284,7 +331,7 @@ samp {
    Only genuinely custom bits live as explicit rules below. */
 
 .prose-course {
-  --tw-prose-body: var(--ink);
+  --tw-prose-body: var(--ink-body);
   --tw-prose-headings: var(--ink);
   --tw-prose-lead: var(--ink-muted);
   --tw-prose-links: var(--link);
@@ -302,7 +349,7 @@ samp {
   --tw-prose-td-borders: var(--line);
 
   font-family: var(--font-prose);
-  max-width: 68ch;
+  max-width: var(--measure);
   text-wrap: pretty;
 }
 
@@ -345,7 +392,7 @@ samp {
   font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: color-mix(in oklab, var(--code-ink) 60%, transparent);
   background-color: color-mix(in oklab, var(--code-ink) 10%, transparent);
@@ -456,7 +503,7 @@ pre .hljs-operator {
   font-size: 1rem;
   font-weight: 450;
   color: var(--ink);
-  line-height: 1.65;
+  line-height: var(--leading-body);
 }
 
 .evidence-editor-content p {
@@ -469,7 +516,7 @@ pre .hljs-operator {
   font-family: var(--font-heading);
   color: var(--ink);
   font-weight: 600;
-  line-height: 1.3;
+  line-height: var(--leading-heading);
   margin-top: 1.5em;
   margin-bottom: 0.5em;
 }
@@ -512,7 +559,7 @@ pre .hljs-operator {
 .evidence-editor-content pre {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  line-height: 1.6;
+  line-height: var(--leading-code);
   background-color: var(--code-bg);
   color: var(--code-ink);
   border: 1px solid var(--code-border);
@@ -635,7 +682,7 @@ pre .hljs-operator {
   min-height: 44px;
   border-radius: var(--radius-sm);
   font-size: 0.9rem;
-  line-height: 1.45;
+  line-height: var(--leading-ui);
   color: var(--ink-muted);
   text-decoration: none;
   transition: background-color 0.15s, color 0.15s;
@@ -784,59 +831,59 @@ pre .hljs-operator {
 .assignment-desc-inner {
   max-width: 720px;
   margin: 0 auto;
-  padding: 2.75rem 1.75rem 3rem;
+  padding: var(--space-8) var(--space-6) var(--space-8);
 }
 
 .assignment-eyebrow {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-label);
   color: var(--accent-structure);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-3);
 }
 
 .assignment-title {
   font-family: var(--font-heading);
   font-size: var(--text-2xl);
-  font-weight: 700;
+  font-weight: var(--weight-heading);
   letter-spacing: var(--tracking-heading);
   color: var(--ink);
-  line-height: 1.2;
+  line-height: var(--leading-heading);
 }
 
 .assignment-lede {
-  margin-top: 0.75rem;
+  margin-top: var(--space-3);
   font-size: var(--text-lg);
   color: var(--ink-muted);
-  line-height: 1.6;
+  line-height: var(--leading-body);
 }
 
 .assignment-slts {
-  margin-top: 2.5rem;
+  margin-top: var(--space-7);
   border-top: 1px solid var(--line);
-  padding-top: 1.5rem;
+  padding-top: var(--space-5);
 }
 .assignment-slts-head {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-label);
   color: var(--ink-muted);
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-4);
 }
 .assignment-slts-list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--space-3);
 }
 .assignment-slt {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: var(--space-3);
   font-size: var(--text-sm);
   color: var(--ink-muted);
-  line-height: 1.5;
+  line-height: var(--leading-ui);
 }
 .assignment-slt-index {
   flex: none;
@@ -861,7 +908,7 @@ pre .hljs-operator {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.75rem clamp(1rem, 6%, 4rem);
+  padding: var(--space-6) clamp(var(--space-4), 6%, var(--space-8));
 }
 
 .assignment-work-art {
@@ -886,7 +933,7 @@ pre .hljs-operator {
   background: var(--surface);
   border-radius: var(--radius-lg);
   box-shadow: 0 16px 40px color-mix(in oklab, #000 28%, transparent);
-  padding: 1.75rem;
+  padding: var(--space-6);
 }
 
 @media (max-width: 900px) {
@@ -899,11 +946,11 @@ pre .hljs-operator {
     overflow: visible;
   }
   .assignment-desc-inner {
-    padding: 2rem 1.25rem 2.5rem;
+    padding: var(--space-6) var(--space-5) var(--space-7);
   }
   .assignment-work {
     min-height: 60vh;
-    padding: 2rem 1rem 2.5rem;
+    padding: var(--space-6) var(--space-4) var(--space-7);
   }
 }
 
