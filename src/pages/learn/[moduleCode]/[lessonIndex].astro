@@ -87,7 +87,10 @@ const title = getPageTitle(lesson.title ?? "Lesson");
         Lesson {lessonIndex} of {totalLessons}
       </p>
       {lesson.title && (
-        <h1 class="text-2xl font-heading text-mn-text sm:text-3xl">
+        <h1
+          class="font-heading text-mn-text"
+          style="font-size: var(--text-3xl); font-weight: var(--weight-heading); letter-spacing: var(--tracking-display); line-height: var(--leading-display)"
+        >
           {lesson.title}
         </h1>
       )}
