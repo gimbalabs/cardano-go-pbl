@@ -98,16 +98,6 @@
   --weight-heading: 600;   /* h1–h3 structural headings */
   --weight-emphasis: 600;  /* inline <strong> — the only 600 in body */
 
-  /* Modular type scale (base 1rem = 17px, ratio ~1.2) */
-  --text-xs: 0.694rem;
-  --text-sm: 0.833rem;
-  --text-base: 1rem;
-  --text-lg: 1.2rem;
-  --text-xl: 1.44rem;
-  --text-2xl: 1.728rem;
-  --text-3xl: 2.074rem;
-  --text-4xl: 2.488rem;
-
   /* Tracking ramp — tighter as type grows; positive on small uppercase. */
   --tracking-display: -0.03em;
   --tracking-heading: -0.02em;
@@ -201,6 +191,18 @@
   --radius-lg: 10px;
   --radius-md: 6px;
   --radius-sm: 4px;
+
+  /* Modular type scale (base 1rem = 17px, ratio ~1.2) — wired into Tailwind's
+     text-* utilities so every size in markup is a scale step. Display caps at
+     --text-4xl; nothing larger is defined (no text-5xl/6xl). */
+  --text-xs: 0.694rem;
+  --text-sm: 0.833rem;
+  --text-base: 1rem;
+  --text-lg: 1.2rem;
+  --text-xl: 1.44rem;
+  --text-2xl: 1.728rem;
+  --text-3xl: 2.074rem;
+  --text-4xl: 2.488rem;
 }
 
 /* ── Base styles ──────────────────────────────────────────────────────── */
