@@ -46,7 +46,8 @@
   --line-strong: #d4d0c2;   /* emphasized hairline */
 
   /* Ink */
-  --ink: #14171a;           /* primary text */
+  --ink: #14171a;           /* headings, UI emphasis (near-black, reserved) */
+  --ink-body: #2b2f36;      /* long-form body — softened so it doesn't buzz */
   --ink-muted: #5f6670;     /* secondary text (AA on paper) */
   --ink-faint: #8a8f98;     /* tertiary / placeholder */
 
@@ -134,6 +135,7 @@
   --line-strong: #ffffff2e;
 
   --ink: #f1f1f1;
+  --ink-body: #d7dce4;      /* softened body on dark, below heading white */
   --ink-muted: #aeb6c2;
   --ink-faint: #7c8493;
 
@@ -229,7 +231,7 @@ html {
 html,
 body {
   background-color: var(--bg);
-  color: var(--ink);
+  color: var(--ink-body);
   font-family: var(--font-body);
   font-weight: var(--weight-body);
   line-height: var(--leading-body);
@@ -313,7 +315,7 @@ samp {
    Only genuinely custom bits live as explicit rules below. */
 
 .prose-course {
-  --tw-prose-body: var(--ink);
+  --tw-prose-body: var(--ink-body);
   --tw-prose-headings: var(--ink);
   --tw-prose-lead: var(--ink-muted);
   --tw-prose-links: var(--link);
