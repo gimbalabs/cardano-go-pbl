@@ -540,25 +540,34 @@ pre .hljs-operator {
   color: var(--syn-punct);
 }
 
-/* Custom: rounded images, and tables that scroll horizontally on small
-   screens (plugin handles colors/borders via --tw-prose-*). */
 .prose-course img {
   border-radius: var(--radius-md);
 }
 
-.prose-course table {
+/* Tables — owned explicitly (the plugin's .prose table styles lose the
+   cascade). Hairline grid, wrapping cells, scrollable on small screens. */
+.prose-course :where(table):not(:where([class~="not-prose"] *)) {
   font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-ui);
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
   display: block;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
-
-.prose-course :where(th, td) {
-  white-space: nowrap;
+.prose-course :where(th, td):not(:where([class~="not-prose"] *)) {
+  padding: 0.5em 0.8em;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid var(--line);
 }
-
-.prose-course :where(th) {
+.prose-course :where(thead th):not(:where([class~="not-prose"] *)) {
+  font-weight: var(--weight-heading);
+  color: var(--ink);
   background-color: color-mix(in oklab, var(--ink) 4%, transparent);
+  border-bottom: 1px solid var(--line-strong);
 }
 
 /* ── TipTap Evidence Editor ─────────────────────────────────────────── */
