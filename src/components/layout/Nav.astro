@@ -15,12 +15,28 @@ import WalletController from "@/components/auth/WalletController";
   class="sticky top-0 z-50 border-b border-course-border bg-course-surface supports-[padding:env(safe-area-inset-top)]:pt-[env(safe-area-inset-top)]"
   id="main-nav"
 >
-  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+  <div class="flex h-16 items-center justify-between px-4 sm:px-6">
     <!-- Brand -->
     <a
       href="/"
-      class="flex items-center gap-3 text-mn-text transition-colors hover:text-mn-primary"
+      class="flex items-center gap-2.5 text-mn-text transition-colors hover:text-mn-primary"
+      aria-label="Home"
     >
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class="shrink-0"
+      >
+        <path d="M3 11.5 12 4l9 7.5"></path>
+        <path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"></path>
+      </svg>
       <span class="text-lg font-semibold font-heading">{BRANDING.name}</span>
     </a>
 
