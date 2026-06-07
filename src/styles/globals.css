@@ -112,6 +112,19 @@
   --leading-ui: 1.4;
   --leading-code: 1.55;
 
+  /* Spacing scale — mirrors Tailwind's 0.25rem grid so vanilla CSS and
+     utility classes share one rhythm. Use small steps within a block,
+     large steps between sections (tight-intra / generous-inter). */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
   /* Focus ring */
   --ring: color-mix(in oklab, var(--accent) 70%, #000);
 
@@ -815,7 +828,7 @@ pre .hljs-operator {
 .assignment-desc-inner {
   max-width: 720px;
   margin: 0 auto;
-  padding: 2.75rem 1.75rem 3rem;
+  padding: var(--space-8) var(--space-6) var(--space-8);
 }
 
 .assignment-eyebrow {
@@ -824,29 +837,29 @@ pre .hljs-operator {
   text-transform: uppercase;
   letter-spacing: var(--tracking-label);
   color: var(--accent-structure);
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-3);
 }
 
 .assignment-title {
   font-family: var(--font-heading);
   font-size: var(--text-2xl);
-  font-weight: 700;
+  font-weight: var(--weight-heading);
   letter-spacing: var(--tracking-heading);
   color: var(--ink);
   line-height: var(--leading-heading);
 }
 
 .assignment-lede {
-  margin-top: 0.75rem;
+  margin-top: var(--space-3);
   font-size: var(--text-lg);
   color: var(--ink-muted);
   line-height: var(--leading-body);
 }
 
 .assignment-slts {
-  margin-top: 2.5rem;
+  margin-top: var(--space-7);
   border-top: 1px solid var(--line);
-  padding-top: 1.5rem;
+  padding-top: var(--space-5);
 }
 .assignment-slts-head {
   font-family: var(--font-mono);
@@ -854,17 +867,17 @@ pre .hljs-operator {
   text-transform: uppercase;
   letter-spacing: var(--tracking-label);
   color: var(--ink-muted);
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-4);
 }
 .assignment-slts-list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--space-3);
 }
 .assignment-slt {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: var(--space-3);
   font-size: var(--text-sm);
   color: var(--ink-muted);
   line-height: var(--leading-ui);
@@ -892,7 +905,7 @@ pre .hljs-operator {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.75rem clamp(1rem, 6%, 4rem);
+  padding: var(--space-6) clamp(var(--space-4), 6%, var(--space-8));
 }
 
 .assignment-work-art {
@@ -917,7 +930,7 @@ pre .hljs-operator {
   background: var(--surface);
   border-radius: var(--radius-lg);
   box-shadow: 0 16px 40px color-mix(in oklab, #000 28%, transparent);
-  padding: 1.75rem;
+  padding: var(--space-6);
 }
 
 @media (max-width: 900px) {
@@ -930,11 +943,11 @@ pre .hljs-operator {
     overflow: visible;
   }
   .assignment-desc-inner {
-    padding: 2rem 1.25rem 2.5rem;
+    padding: var(--space-6) var(--space-5) var(--space-7);
   }
   .assignment-work {
     min-height: 60vh;
-    padding: 2rem 1rem 2.5rem;
+    padding: var(--space-6) var(--space-4) var(--space-7);
   }
 }
 
