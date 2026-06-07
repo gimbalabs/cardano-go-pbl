@@ -51,38 +51,32 @@ const title = getPageTitle(`Assignment: ${module.title ?? moduleCode}`);
     <div class="assignment-desc">
       <div class="assignment-progress" aria-hidden="true"></div>
       <div class="assignment-desc-inner">
-        <a href={`/learn/${moduleCode}/${firstIndex}`} class="assignment-back">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M10 12L6 8l4-4"></path>
-          </svg>
-          <span>Back to module</span>
-        </a>
-        <p class="assignment-eyebrow">{module.title ?? "Module"} · Assignment</p>
+        <nav class="assignment-breadcrumb" aria-label="Breadcrumb">
+          <a href={`/learn/${moduleCode}/${firstIndex}`} class="assignment-crumb-link">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M10 12L6 8l4-4"></path>
+            </svg>
+            <span>{module.title ?? "Module"}</span>
+          </a>
+          <span class="assignment-crumb-sep" aria-hidden="true">·</span>
+          <span class="assignment-crumb-current">Assignment</span>
+        </nav>
+
         <h1 class="assignment-title">
           {assignment?.title ?? `${module.title ?? "Module"} Assignment`}
         </h1>
         {assignment?.description && (
           <p class="assignment-lede">{assignment.description}</p>
-        )}
-
-        {assignment && contentHtml ? (
-          <article class="prose prose-course mt-6" set:html={contentHtml} />
-        ) : (
-          <div class="mt-6 rounded-lg border border-course-border bg-course-card p-6 text-center">
-            <p class="text-mn-text-muted">
-              No assignment available for this module yet.
-            </p>
-          </div>
         )}
 
         {sortedSlts.length > 0 && (
@@ -96,6 +90,16 @@ const title = getPageTitle(`Assignment: ${module.title ?? moduleCode}`);
                 </li>
               ))}
             </ul>
+          </div>
+        )}
+
+        {assignment && contentHtml ? (
+          <article class="prose prose-course assignment-body" set:html={contentHtml} />
+        ) : (
+          <div class="mt-6 rounded-lg border border-course-border bg-course-card p-6 text-center">
+            <p class="text-mn-text-muted">
+              No assignment available for this module yet.
+            </p>
           </div>
         )}
       </div>

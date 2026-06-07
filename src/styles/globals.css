@@ -910,27 +910,34 @@ pre .hljs-operator {
   padding: var(--space-8) var(--space-6) var(--space-8);
 }
 
-.assignment-back {
-  display: inline-flex;
+/* Breadcrumb — merges "back to module" + the module/assignment eyebrow.
+   Module name is the link back; "Assignment" is the current crumb. */
+.assignment-breadcrumb {
+  display: flex;
   align-items: center;
-  gap: 0.375rem;
-  margin-bottom: var(--space-6);
-  font-size: var(--text-sm);
-  color: var(--ink-muted);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.assignment-back:hover {
-  color: var(--link);
-}
-
-.assignment-eyebrow {
+  gap: 0.5rem;
+  margin-bottom: var(--space-5);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: var(--tracking-label);
+}
+.assignment-crumb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   color: var(--accent-structure);
-  margin-bottom: var(--space-3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.assignment-crumb-link:hover {
+  color: var(--link);
+}
+.assignment-crumb-sep {
+  color: var(--ink-faint);
+}
+.assignment-crumb-current {
+  color: var(--ink-muted);
 }
 
 .assignment-title {
@@ -947,6 +954,13 @@ pre .hljs-operator {
   font-size: var(--text-lg);
   color: var(--ink-muted);
   line-height: var(--leading-body);
+}
+
+/* Prose body sits after the SLT block — separate it with a hairline. */
+.assignment-body {
+  margin-top: var(--space-7);
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-6);
 }
 
 .assignment-slts {
