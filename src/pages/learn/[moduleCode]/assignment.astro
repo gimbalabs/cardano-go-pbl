@@ -7,7 +7,7 @@
  *
  * Route: /learn/:moduleCode/assignment
  */
-import LearnLayout from "@/layouts/LearnLayout.astro";
+import AppLayout from "@/layouts/AppLayout.astro";
 import { fetchModuleDetail, fetchSLTs, fetchAssignment } from "@/lib/gateway.server";
 import { renderMarkdown } from "@/lib/markdown";
 import { CURRENT_NETWORK } from "@/config/network";
@@ -39,23 +39,34 @@ const sortedSlts = [...slts].sort(
   (a, b) => (a.moduleIndex ?? 0) - (b.moduleIndex ?? 0)
 );
 
+// First lesson of the module — target for "Back to module".
+const firstIndex = sortedSlts[0]?.moduleIndex ?? 1;
+
 const title = getPageTitle(`Assignment: ${module.title ?? moduleCode}`);
 ---
 
-<LearnLayout
-  title={title}
-  moduleCode={moduleCode}
-  moduleTitle={module.title ?? "Untitled Module"}
-  moduleDescription={module.description}
-  slts={slts}
-  currentLessonIndex={null}
-  isAssignment={true}
->
+<AppLayout title={title}>
   <div class="assignment-split">
     <!-- Left: assignment description / rubric -->
     <div class="assignment-desc">
       <div class="assignment-progress" aria-hidden="true"></div>
       <div class="assignment-desc-inner">
+        <a href={`/learn/${moduleCode}/${firstIndex}`} class="assignment-back">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M10 12L6 8l4-4"></path>
+          </svg>
+          <span>Back to module</span>
+        </a>
         <p class="assignment-eyebrow">{module.title ?? "Module"} · Assignment</p>
         <h1 class="assignment-title">
           {assignment?.title ?? `${module.title ?? "Module"} Assignment`}
@@ -103,4 +114,4 @@ const title = getPageTitle(`Assignment: ${module.title ?? moduleCode}`);
       </div>
     </div>
   </div>
-</LearnLayout>
+</AppLayout>
