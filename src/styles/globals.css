@@ -90,6 +90,14 @@
   --radius-lg: 10px;
   --radius-xl: 14px;
 
+  /* Weight roles — large-goes-lighter, capped at 600. Hierarchy comes from
+     size + space + tracking, not heavier strokes. */
+  --weight-body: 400;
+  --weight-label: 500;
+  --weight-display: 500;   /* hero / largest type — lighter at scale */
+  --weight-heading: 600;   /* h1–h3 structural headings */
+  --weight-emphasis: 600;  /* inline <strong> — the only 600 in body */
+
   /* Modular type scale (base 1rem = 17px, ratio ~1.2) */
   --text-xs: 0.694rem;
   --text-sm: 0.833rem;
@@ -98,6 +106,7 @@
   --text-xl: 1.44rem;
   --text-2xl: 1.728rem;
   --text-3xl: 2.074rem;
+  --text-4xl: 2.488rem;
   --tracking-heading: -0.018em;
 
   /* Focus ring */
@@ -150,8 +159,9 @@
 /* ── Tailwind v4 theme — ALIASES only (maps tokens into utilities) ─────── */
 
 @theme {
-  /* Fonts — Work Sans (Go brand) headings, Geist body/UI, Go Mono code */
-  --font-heading: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  /* Fonts — Geist for all text (headings via weight+tracking+size, not a
+     second family), Go Mono for code (the sole second voice). */
+  --font-heading: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-prose: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Go Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular",
@@ -199,6 +209,7 @@
 
 html {
   font-size: 17px;
+  font-optical-sizing: auto;
 }
 
 html,
@@ -206,6 +217,7 @@ body {
   background-color: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
+  font-weight: var(--weight-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -217,6 +229,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
   letter-spacing: var(--tracking-heading);
 }
 
